@@ -1,0 +1,65 @@
+name: Backend
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main", "dev" ]
+
+jobs:
+  build-back:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ '18.x', '20.x' ]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: build backend
+        working-directory: server/
+        run: |
+          npm install
+          npm run build
+  test-back:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ '18.x', '20.x' ]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: run tests of backend
+        working-directory: server/
+        run: |
+          npm install
+          npm run test
+  lint-back:
+    needs: [ build-back ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - name: lint backend
+        working-directory: server/
+        run: |
+          npm install
+          npm run lint
+  format-back:
+    needs: [ build-back ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - name: format backend
+        working-directory: server/
+        run: |
+          npm install
+          npm run format

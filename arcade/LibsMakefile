@@ -1,0 +1,124 @@
+##
+## EPITECH PROJECT, 2024
+## Makefile
+## File description:
+## Arcade
+##
+
+NCURSES_SRC=src/DisplayModules/ADisplayModule.cpp \
+	src/Event/Event.cpp \
+	src/Event/KeyboardEvent.cpp \
+	src/Event/MouseEvent.cpp \
+	src/Event/WindowEvent.cpp \
+	src/Entities/Entity.cpp \
+	src/DisplayModules/Ncurses/NCursesModule.cpp	\
+	src/Exceptions/DisplayModulesExceptions.cpp \
+
+SDL2_SRC=src/DisplayModules/ADisplayModule.cpp \
+	src/Event/Event.cpp \
+	src/Event/KeyboardEvent.cpp \
+	src/Event/MouseEvent.cpp \
+	src/Event/WindowEvent.cpp \
+	src/Entities/Entity.cpp \
+	src/DisplayModules/SDL2/SDL2Module.cpp \
+	src/Exceptions/DisplayModulesExceptions.cpp \
+
+MENU_SRC=src/GameModules/AGameModule.cpp \
+	src/Event/Event.cpp \
+	src/Event/KeyboardEvent.cpp \
+	src/Event/MouseEvent.cpp \
+	src/Event/WindowEvent.cpp \
+	src/Entities/Entity.cpp \
+	src/GameModules/MenuModule.cpp \
+	src/Exceptions/GameModulesExceptions.cpp \
+
+SFML_SRC=src/DisplayModules/ADisplayModule.cpp \
+	src/Event/Event.cpp \
+	src/Event/KeyboardEvent.cpp \
+	src/Event/MouseEvent.cpp \
+	src/Event/WindowEvent.cpp \
+	src/Entities/Entity.cpp \
+	src/DisplayModules/SFML/SFMLModule.cpp \
+	src/Exceptions/DisplayModulesExceptions.cpp \
+
+SNAKE_SRC=src/GameModules/AGameModule.cpp \
+	src/Event/Event.cpp \
+	src/Event/KeyboardEvent.cpp \
+	src/Event/MouseEvent.cpp \
+	src/Event/WindowEvent.cpp \
+	src/Entities/Entity.cpp \
+	src/GameModules/SnakeModule.cpp \
+	src/Exceptions/GameModulesExceptions.cpp \
+
+NIBBLER_SRC=src/GameModules/AGameModule.cpp \
+	src/Event/Event.cpp \
+	src/Event/KeyboardEvent.cpp \
+	src/Event/MouseEvent.cpp \
+	src/Event/WindowEvent.cpp \
+	src/Entities/Entity.cpp \
+	src/GameModules/NibblerModule.cpp \
+	src/Exceptions/GameModulesExceptions.cpp \
+
+NCURSES_OBJ=$(NCURSES_SRC:.cpp=.o)
+
+SDL2_OBJ=$(SDL2_SRC:.cpp=.o)
+
+SFML_OBJ=$(SFML_SRC:.cpp=.o)
+
+MENU_OBJ=$(MENU_SRC:.cpp=.o)
+
+SNAKE_OBJ=$(SNAKE_SRC:.cpp=.o)
+
+NIBBLER_OBJ=$(NIBBLER_SRC:.cpp=.o)
+
+CPPFLAGS=-iquote include
+
+CXXFLAGS=-c -Wall -Werror -fPIC
+
+LIB_FLAG=-shared
+
+RM?=rm -f
+
+games: menu
+games: snake
+games: nibbler
+
+graphicals: ncurses
+graphicals: sdl2
+graphicals: sfml
+
+menu: $(MENU_OBJ)
+	$(CXX) $(LIB_FLAG) -o lib/arcade_menu.so $(MENU_OBJ)
+
+snake: $(SNAKE_OBJ)
+	$(CXX) $(LIB_FLAG) -o lib/arcade_snake.so $(SNAKE_OBJ)
+
+nibbler: $(NIBBLER_OBJ)
+	$(CXX) $(LIB_FLAG) -o lib/arcade_nibbler.so $(NIBBLER_OBJ)
+
+ncurses: $(NCURSES_OBJ)
+	$(CXX) $(LIB_FLAG) -o lib/arcade_ncurses.so $(NCURSES_OBJ) -lncurses
+
+sdl2: $(SDL2_OBJ)
+	$(CXX) $(LIB_FLAG) -o lib/arcade_sdl2.so $(SDL2_OBJ) -lSDL2 -lSDL2_ttf -lSDL2_image
+
+sfml: $(SFML_OBJ)
+	$(CXX) $(LIB_FLAG) -o lib/arcade_sfml.so $(SFML_OBJ) -lsfml-graphics -lsfml-window
+
+clean:
+	$(RM) $(MENU_OBJ)
+	$(RM) $(SNAKE_OBJ)
+	$(RM) $(NIBBLER_OBJ)
+	$(RM) $(NCURSES_OBJ)
+	$(RM) $(SDL2_OBJ)
+	$(RM) $(SFML_OBJ)
+
+fclean: clean
+	$(RM) lib/arcade_menu.so
+	$(RM) lib/arcade_snake.so
+	$(RM) lib/arcade_nibbler.so
+	$(RM) lib/arcade_ncurses.so
+	$(RM) lib/arcade_sdl2.so
+	$(RM) lib/arcade_sfml.so
+
+.PHONY: fclean clean menu snake nibbler ncurses sdl2 sfml

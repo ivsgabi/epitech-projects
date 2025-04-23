@@ -1,0 +1,8 @@
+attack1;damage1;attack2;damame2;attack3;damage3;attack4;damage4
+Lance-flamme;60;Charge;40;Flameche;40;Griffe;30
+Tonnerre;60;Queue de fer;40;Etincelle;50;Vive-attaque;40
+Bulles d'O;40;Hydrocanon;60;Charge;40;Vive-attaque;40
+Picpic;40;Bec-vrille;60;Charge;40;Griffe;30
+Fouet Lianes;60;Tranch-herbe;40;Vive-attaque;40;Griffe;30
+Acide;60;Bomb-berk;40;Charge;40;Ball'Ombre;40
+Griffe;30;Tranche;60;Charge;40;Vive-attaque;40

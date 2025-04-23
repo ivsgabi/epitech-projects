@@ -1,0 +1,50 @@
+name: Web
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main", "dev" ]
+
+jobs:
+  build-web:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ '18.x', '20.x' ]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: build frontend web
+        working-directory: web/
+        run: |
+          npm install
+          npm run build
+  lint-web:
+    needs: [ build-web ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - name: lint frontend web
+        working-directory: web/
+        run: |
+          npm install
+          npm run lint:check
+  format-web:
+    needs: [ build-web ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - name: format frontend web
+        working-directory: web/
+        run: |
+          npm install
+          npm run format:check

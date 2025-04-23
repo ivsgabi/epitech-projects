@@ -1,0 +1,6 @@
+1000;460;3.5;3.5;160;160;80;80;feu;150;70;45;60;assets/pokemon_f1.png;assets/pokemon_f2.png;assets/dos_f1.png;assets/dos_f2.png;arkanin
+1000;460;3.5;3.5;2000;0;80;80;electrik;200;40;15;60;assets/pokemon_f1.png;assets/pokemon_f2.png;assets/dos_f1.png;assets/dos_f2.png;raichu
+1000;460;3.5;3.5;1360;0;80;80;vol;250;45;40;56;assets/pokemon_f1.png;assets/pokemon_f2.png;assets/dos_f1.png;assets/dos_f2.png;roucarnage
+1000;460;3.5;3.5;400;0;80;80;feu;300;52;43;65;assets/pokemon_f1.png;assets/pokemon_f2.png;assets/dos_f1.png;assets/dos_f2.png;dracaufeu
+1000;460;3.5;3.5;2000;80;80;80;eau;50;52;48;55;assets/pokemon_f1.png;assets/pokemon_f2.png;assets/dos_f1.png;assets/dos_f2.png;psykokwak
+1000;460;3.5;3.5;720;80;80;80;feu;70;41;40;65;assets/pokemon_f1.png;assets/pokemon_f2.png;assets/dos_f1.png;assets/dos_f2.png;feunard

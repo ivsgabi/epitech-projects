@@ -1,0 +1,29 @@
+name: Compilation
+run-name: Compilation for "${{ github.event.head_commit.message }}"
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  EXECUTABLES: "arcade, lib/arcade_ncurses.so, lib/arcade_nibbler.so, lib/arcade_sdl2.so, lib/arcade_sfml.so, lib/arcade_sfml.so, lib/arcade_snake.so"
+
+jobs:
+  check_program_compilation:
+    runs-on: ubuntu-latest
+    container:
+      image: epitechcontent/epitest-docker
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - run: |
+          timeout 120 make && make clean
+      - run: |
+          for EXECUTABLE in $(echo $EXECUTABLES | tr "," "\n"); do
+            if [[ ! -f $EXECUTABLE ]]; then
+              echo "::error file=Makefile,title=Makefile error::Missing executable $EXECUTABLE"
+              exit 1
+            fi
+          done

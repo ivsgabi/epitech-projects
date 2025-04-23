@@ -1,0 +1,123 @@
+##
+## EPITECH PROJECT, 2024
+## Makefile
+## File description:
+## Raytracer
+##
+
+SPHERE_SRC=src/Primitives/Sphere.cpp \
+			src/Math/Point3D.cpp \
+			src/Math/Vector3D.cpp \
+			src/RayTracer/Ray.cpp \
+			src/RayTracer/HitRecord.cpp \
+			src/VisualComp/Color.cpp \
+			src/Primitives/APrimitive.cpp \
+			src/Transformations/Translation.cpp
+
+SPHERE_OBJ=$(SPHERE_SRC:.cpp=.o)
+
+
+PLANE_SRC=src/Primitives/Plane.cpp \
+			src/Math/Point3D.cpp \
+			src/Math/Vector3D.cpp \
+			src/RayTracer/Ray.cpp \
+			src/RayTracer/HitRecord.cpp \
+			src/VisualComp/Color.cpp \
+			src/Primitives/APrimitive.cpp \
+			src/Transformations/Translation.cpp
+
+PLANE_OBJ=$(PLANE_SRC:.cpp=.o)
+
+TRANS_SRC=src/Transformations/Translation.cpp \
+			src/Math/Point3D.cpp \
+			src/Math/Vector3D.cpp \
+			src/RayTracer/Ray.cpp \
+			src/RayTracer/HitRecord.cpp \
+
+TRANS_OBJ=$(TRANS_SRC:.cpp=.o)
+
+AMBIENT_LIGHT_SRC=src/Lights/ALight.cpp \
+				src/Lights/AmbientLight.cpp \
+				src/Math/Point3D.cpp \
+				src/Math/Vector3D.cpp \
+
+AMBIENT_LIGHT_OBJ=$(AMBIENT_LIGHT_SRC:.cpp=.o)
+
+
+LIGHT_DIRECTION_SRC=src/Lights/ALight.cpp \
+				src/Lights/LightDirection.cpp \
+				src/Math/Point3D.cpp \
+				src/Math/Vector3D.cpp \
+				src/Transformations/Translation.cpp
+
+LIGHT_DIRECTION_OBJ=$(LIGHT_DIRECTION_SRC:.cpp=.o)
+
+
+LIGHT_POINT_SRC=src/Lights/ALight.cpp \
+				src/Lights/LightPoint.cpp \
+				src/Math/Point3D.cpp \
+				src/Math/Vector3D.cpp \
+				src/Transformations/Translation.cpp
+
+LIGHT_POINT_OBJ=$(LIGHT_POINT_SRC:.cpp=.o)
+
+
+CPPFLAGS=-iquote include
+
+CXXFLAGS=-c -Wall -Werror -fPIC
+
+LIB_FLAG=-shared
+
+RM?=rm -f
+
+plugins: primitives
+plugins: lights
+plugins: transformations
+
+primitives: sphere
+primitives: plane
+
+lights: ambient_light
+lights: light_direction
+lights: light_point
+
+transformations: translation
+
+sphere: $(SPHERE_OBJ)
+	$(CXX) $(LIB_FLAG) -o plugins/primitives/libsphere.so $(SPHERE_OBJ)
+
+plane: $(PLANE_OBJ)
+	$(CXX) $(LIB_FLAG) -o plugins/primitives/libplane.so $(PLANE_OBJ)
+
+ambient_light: $(AMBIENT_LIGHT_OBJ)
+	$(CXX) $(LIB_FLAG) -o plugins/lights/libambient.so $(AMBIENT_LIGHT_OBJ)
+
+light_direction: $(LIGHT_DIRECTION_OBJ)
+	$(CXX) $(LIB_FLAG) -o plugins/lights/libdirectionnal.so $(LIGHT_DIRECTION_OBJ)
+
+light_point: $(LIGHT_POINT_OBJ)
+	$(CXX) $(LIB_FLAG) -o plugins/lights/libpoint.so $(LIGHT_POINT_OBJ)
+
+translation: $(TRANS_OBJ)
+	$(CXX) $(LIB_FLAG) -o plugins/transformations/libtranslation.so $(TRANS_OBJ)
+
+clean:
+	$(RM) $(SPHERE_OBJ)
+	$(RM) $(PLANE_OBJ)
+	$(RM) $(AMBIENT_LIGHT_OBJ)
+	$(RM) $(LIGHT_DIRECTION_OBJ)
+	$(RM) $(LIGHT_POINT_OBJ)
+	$(RM) $(CAMERA_OBJ)
+	$(RM) $(TRANS_OBJ)
+
+fclean: clean
+	$(RM) plugins/primitives/libsphere.so
+	$(RM) plugins/primitives/libplane.so
+	$(RM) plugins/primitives/libambient.so
+	$(RM) plugins/primitives/libdirectionnal.so
+	$(RM) plugins/primitives/libpoint.so
+	$(RM) plugins/lights/libcamera.so
+	$(RM) plugins/lights/libtranslation.so
+	$(RM) plugins/transformations/libtranslation.so
+
+.PHONY: fclean clean sphere
