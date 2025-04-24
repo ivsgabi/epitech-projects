@@ -40,13 +40,13 @@ void my_simple_flags(va_list ap, int i, int count, char data)
     case 's': my_putstr(va_arg(ap, char *)); break;
     case 'c': my_putchar(va_arg(ap, int)); break;
     case 'd': my_put_nbr(va_arg(ap, int)); break;
-    case 'p': my_low_hexa_zero(va_arg(ap, void *)); break;
+    case 'p': my_low_hexa_zero((unsigned long)va_arg(ap, void *)); break;
     case 'o': my_octal_convert(va_arg(ap, unsigned int)); break;
     case 'x': my_low_hexa_conv(va_arg(ap, long unsigned int)); break;
     case 'X': my_up_hexa_conv(va_arg(ap, long unsigned int)); break;
     case 'u': my_u_flag(va_arg(ap, unsigned int)); break;
-    case 'b': my_put_binary(va_arg(ap, int)); break;
-    case 'S': my_put_special_string(va_arg(ap, char *)); break;
+    //case 'b': my_put_binary(va_arg(ap, int)); break;
+    //case 'S': my_put_special_string(va_arg(ap, char *)); break;
     case 'n': int *pointer = va_arg(ap, int *); my_n(count, pointer); break;
     case '%': my_putchar('%'); break;
     }

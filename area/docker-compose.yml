@@ -23,15 +23,15 @@ services:
       - database
     build: server
 
-  client_mobile:
-    container_name: area_mobile
-    volumes:
-     - apk_volume:/app/mobile/build/app/apk-mobile
-    build: mobile
-    ulimits:
-      nofile:
-        soft: "65536"
-        hard: "65536"
+  # client_mobile:
+  #   container_name: area_mobile
+  #   volumes:
+  #    - apk_volume:/app/mobile/build/app/apk-mobile
+  #   build: mobile
+  #   ulimits:
+  #     nofile:
+  #       soft: "65536"
+  #       hard: "65536"
 
   client_web:
     container_name: area_web
@@ -39,10 +39,10 @@ services:
       - "8081:8081"
     depends_on:
       - server
-      - client_mobile
+      # - client_mobile
     build: web
-    volumes:
-    - apk_volume:/app/web/public
+    # volumes:
+    # - apk_volume:/app/web/public
 
   adminer:
     container_name: db_ui
@@ -57,7 +57,7 @@ services:
 
 volumes:
   db:
-  apk_volume:
+  # apk_volume:
 
 networks:
   backend_network:

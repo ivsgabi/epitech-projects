@@ -1,0 +1,1 @@
+target_sources(${SERVER_EXEC} PRIVATE GameServer.cpp)
